@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alex | Web Developer Portfolio</title>
+
+    <style>
+      /* Global Styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background: radial-gradient(
+          circle at top left,
+          #000814,
+          #001233,
+          #000814
+        );
+        color: #e0e0e0;
+        font-family: "Poppins", sans-serif;
+        overflow-x: hidden;
+        position: relative;
+      }
+
+      header {
+        text-align: center;
+        padding: 80px 20px 50px;
+      }
+
+      header h1 {
+        font-size: 3em;
+        background: linear-gradient(90deg, #0077ff, #00aaff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: 700;
+        letter-spacing: 2px;
+        margin-bottom: 15px;
+      }
+
+      header p {
+        font-size: 1.2em;
+        color: #aaa;
+        min-height: 1.5em;
+      }
+
+      section {
+        max-width: 900px;
+        margin: 60px auto;
+        padding: 20px;
+        text-align: center;
+        opacity: 0;
+        transform: translateY(50px);
+        transition: all 1s ease-out;
+      }
+
+      section.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      h2 {
+        font-size: 2em;
+        color: #00aaff;
+        margin-bottom: 15px;
+        position: relative;
+      }
+
+      h2::after {
+        content: "";
+        display: block;
+        width: 60px;
+        height: 3px;
+        background: #0077ff;
+        margin: 8px auto;
+        border-radius: 5px;
+      }
+
+      .about,
+      .skills {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 15px;
+        padding: 30px;
+        margin-top: 30px;
+        box-shadow: 0 0 25px rgba(0, 0, 255, 0.15);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .about:hover,
+      .skills:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0 40px rgba(0, 0, 255, 0.3);
+      }
+
+      .skills ul {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+      }
+
+      .skills li {
+        background: rgba(0, 119, 255, 0.2);
+        padding: 10px 20px;
+        border-radius: 20px;
+        color: #fff;
+        font-weight: 500;
+        transition: background 0.3s ease;
+      }
+
+      .skills li:hover {
+        background: rgba(0, 119, 255, 0.5);
+      }
+
+      a.button {
+        display: inline-block;
+        background: #0055ff;
+        color: white;
+        padding: 12px 25px;
+        border-radius: 25px;
+        text-decoration: none;
+        font-weight: 600;
+        margin-top: 20px;
+        transition: background 0.3s ease, transform 0.3s ease;
+      }
+
+      a.button:hover {
+        background: #0077ff;
+        transform: scale(1.05);
+      }
+
+      footer {
+        text-align: center;
+        padding: 20px;
+        font-size: 0.9em;
+        color: #777;
+        margin-top: 40px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      /* Typewriter Effect */
+      .typewriter {
+        display: inline-block;
+        border-right: 3px solid #00aaff;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+
+      /* Particle canvas */
+      #particles-js {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        top: 0;
+        left: 0;
+      }
+
+      /* Burger Menu Styles */
+      .burger-menu {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+      }
+
+      .menu-icon {
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+        width: 30px;
+      }
+
+      .menu-icon span {
+        height: 3px;
+        background: #0077ff; /* Your blue highlight */
+        margin: 5px 0;
+        border-radius: 2px;
+        transition: 0.3s;
+      }
+
+      #menu-toggle {
+        display: none;
+      }
+
+      .menu {
+        display: none;
+        flex-direction: column;
+        background: rgba(0, 0, 0, 0.9);
+        padding: 10px;
+        border-radius: 10px;
+        position: absolute;
+        top: 40px;
+        right: 0;
+      }
+
+      .menu a {
+        margin: 5px 0;
+      }
+
+      /* Show menu when checkbox is checked */
+      #menu-toggle:checked + .menu-icon + .menu {
+        display: flex;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Particle Background -->
+    <div id="particles-js"></div>
+
+    <header>
+      <h1>Hi, I'm Alex 👋</h1>
+      <p class="typewriter"></p>
+
+      <!-- Burger menu container -->
+      <div class="burger-menu">
+        <input type="checkbox" id="menu-toggle" />
+        <label for="menu-toggle" class="menu-icon">
+          <span></span>
+          <span></span>
+          <span></span>
+        </label>
+
+        <nav class="menu">
+          <a href="/" class="button">Home</a>
+          <a href="/projects/" class="button">Projects</a>
+          <a href="/blog/" class="button">Blog</a>
+          <a href="/contact/" class="button">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <section class="about">
+      <h2>About Me</h2>
+      <p>
+        I’m a passionate web developer with a focus on backend development using
+        <strong>Python</strong> and <strong>Django</strong>. Over the past year,
+        I’ve completed intensive bootcamps and real-world projects that helped
+        me master everything from building APIs to full-stack web applications.
+        I enjoy crafting software that feels human, performs efficiently, and
+        solves real problems.
+      </p>
+      <a href="/projects/" class="button">View My Projects</a>
+    </section>
+
+    <section class="skills">
+      <h2>My Skills</h2>
+      <ul>
+        <li>Python</li>
+        <li>Django</li>
+        <li>REST APIs</li>
+        <li>JavaScript</li>
+        <li>HTML & CSS</li>
+        <li>Bootstrap / Tailwind</li>
+        <li>Git & GitHub</li>
+        <li>SQL / PostgreSQL</li>
+      </ul>
+    </section>
+
+    <footer>© {{ now|date:"Y" }} Alex | Built with 💙 Django</footer>
+
+    <!-- JS Animations -->
+    <script>
+      // Typewriter effect
+      const typewriterText =
+        "Python & Django Web Developer | Creating Seamless Web Experiences";
+      const typewriterEl = document.querySelector(".typewriter");
+      let i = 0;
+      function typeWriter() {
+        if (i < typewriterText.length) {
+          typewriterEl.innerHTML += typewriterText.charAt(i);
+          i++;
+          setTimeout(typeWriter, 50);
+        }
+      }
+      typeWriter();
+
+      // Scroll reveal
+      const sections = document.querySelectorAll("section");
+      window.addEventListener("scroll", () => {
+        sections.forEach((section) => {
+          const top = section.getBoundingClientRect().top;
+          if (top < window.innerHeight - 100) {
+            section.classList.add("visible");
+          }
+        });
+      });
+    </script>
+
+    <!-- Particle JS (CDN) -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script>
+      particlesJS("particles-js", {
+        particles: {
+          number: { value: 80 },
+          size: { value: 3 },
+          color: { value: "#00aaff" },
+          line_linked: {
+            enable: true,
+            distance: 150,
+            color: "#00aaff",
+            opacity: 0.4,
+            width: 1,
+          },
+          move: { enable: true, speed: 2 },
+        },
+        interactivity: { events: { onhover: { enable: true, mode: "grab" } } },
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,61 @@
+<section class="projects">
+  <h2>My Projects</h2>
+  <div class="project-grid">
+    {% for project in projects %}
+    <div class="project-card">
+      {% if project.image %}
+      <img src="{{ project.image.url }}" alt="{{ project.title }}" />
+      {% endif %}
+      <h3>{{ project.title }}</h3>
+      <p>{{ project.description|truncatewords:30 }}</p>
+      <p><strong>Tech:</strong> {{ project.technologies }}</p>
+      <a href="{{ project.get_absolute_url }}" class="button">View Details</a>
+      {% if project.github_url %}
+      <a href="{{ project.github_url }}" target="_blank" class="button"
+        >GitHub</a
+      >
+      {% endif %} {% if project.live_url %}
+      <a href="{{ project.live_url }}" target="_blank" class="button"
+        >Live Demo</a
+      >
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+
+  <style>
+    .project-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .project-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 15px;
+      padding: 20px;
+      width: 280px;
+      box-shadow: 0 0 15px rgba(0, 119, 255, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 40px rgba(0, 119, 255, 0.4);
+    }
+
+    .project-card img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    .project-card a.button {
+      margin: 5px 5px 0 0;
+      font-size: 0.9em;
+      display: inline-block;
+    }
+  </style>
+</section>

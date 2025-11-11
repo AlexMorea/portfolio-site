@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alex | Web Developer Portfolio</title>
+
+    <style>
+      /* Global Styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: radial-gradient(
+          circle at top left,
+          #000814,
+          #001233,
+          #000814
+        );
+        color: #e0e0e0;
+        font-family: "Poppins", sans-serif;
+        overflow-x: hidden;
+      }
+
+      header {
+        text-align: center;
+        padding: 80px 20px 50px;
+        animation: fadeIn 1.5s ease-in-out;
+      }
+
+      header h1 {
+        font-size: 3em;
+        background: linear-gradient(90deg, #0077ff, #00aaff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: 700;
+        letter-spacing: 2px;
+        animation: glow 3s infinite alternate;
+      }
+
+      header p {
+        margin-top: 15px;
+        font-size: 1.2em;
+        color: #aaa;
+        animation: fadeIn 2s ease-in-out;
+      }
+
+      section {
+        max-width: 900px;
+        margin: 60px auto;
+        padding: 20px;
+        text-align: center;
+      }
+
+      h2 {
+        font-size: 2em;
+        color: #00aaff;
+        margin-bottom: 15px;
+        position: relative;
+      }
+
+      h2::after {
+        content: "";
+        display: block;
+        width: 60px;
+        height: 3px;
+        background: #0077ff;
+        margin: 8px auto;
+        border-radius: 5px;
+      }
+
+      .about,
+      .skills {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 15px;
+        padding: 30px;
+        margin-top: 30px;
+        box-shadow: 0 0 25px rgba(0, 0, 255, 0.15);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        animation: fadeInUp 1.5s ease-in-out;
+      }
+
+      .about:hover,
+      .skills:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0 40px rgba(0, 0, 255, 0.3);
+      }
+
+      .skills ul {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+      }
+
+      .skills li {
+        background: rgba(0, 119, 255, 0.2);
+        padding: 10px 20px;
+        border-radius: 20px;
+        color: #fff;
+        font-weight: 500;
+        transition: background 0.3s ease;
+      }
+
+      .skills li:hover {
+        background: rgba(0, 119, 255, 0.5);
+      }
+
+      footer {
+        text-align: center;
+        padding: 20px;
+        font-size: 0.9em;
+        color: #777;
+        margin-top: 40px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      /* Animations */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(40px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes glow {
+        from {
+          text-shadow: 0 0 10px #0077ff, 0 0 20px #00aaff;
+        }
+        to {
+          text-shadow: 0 0 20px #00aaff, 0 0 40px #0077ff;
+        }
+      }
+
+      a.button {
+        display: inline-block;
+        background: #0055ff;
+        color: white;
+        padding: 12px 25px;
+        border-radius: 25px;
+        text-decoration: none;
+        font-weight: 600;
+        margin-top: 20px;
+        transition: background 0.3s ease, transform 0.3s ease;
+      }
+
+      a.button:hover {
+        background: #0077ff;
+        transform: scale(1.05);
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Hi, I'm Alex 👋</h1>
+      <p>Python & Django Web Developer | Building the Future of the Web</p>
+    </header>
+
+    <section class="about">
+      <h2>About Me</h2>
+      <p>
+        I’m a passionate web developer with a focus on backend development using
+        <strong>Python</strong> and <strong>Django</strong>. Over the past year,
+        I’ve completed intensive bootcamps and real-world projects that helped
+        me master everything from building APIs to full-stack web applications.
+        I enjoy crafting software that feels human, performs efficiently, and
+        solves real problems.
+      </p>
+      <a href="/projects/" class="button">View My Projects</a>
+    </section>
+
+    <section class="skills">
+      <h2>My Skills</h2>
+      <ul>
+        <li>Python</li>
+        <li>Django</li>
+        <li>REST APIs</li>
+        <li>JavaScript (ES6+)</li>
+        <li>HTML5 & CSS3</li>
+        <li>Bootstrap & Tailwind</li>
+        <li>SQLite & PostgreSQL</li>
+        <li>Git & GitHub</li>
+      </ul>
+    </section>
+
+    <footer>© {{ now|date:"Y" }} Alex | Built with 💙 Django</footer>
+  </body>
+</html>

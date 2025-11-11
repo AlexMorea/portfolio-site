@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Projects</title>
+    <style>
+      body {
+        background-color: #0a0a0f;
+        color: #e0e0e0;
+        font-family: "Poppins", sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      header {
+        background: linear-gradient(90deg, #000000, #0a1a3a);
+        color: white;
+        padding: 20px;
+        text-align: center;
+        font-size: 2em;
+        font-weight: 600;
+        letter-spacing: 1px;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 20px;
+      }
+
+      .project {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 20px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .project:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 255, 0.2);
+      }
+
+      .project h2 {
+        color: #00aaff;
+        margin-top: 0;
+      }
+
+      .project p {
+        line-height: 1.6;
+        color: #b0b0b0;
+      }
+
+      footer {
+        text-align: center;
+        padding: 20px;
+        font-size: 0.9em;
+        color: #666;
+      }
+    </style>
+  </head>
+  <body>
+    <header>💼 My Portfolio Projects</header>
+
+    <div class="container">
+      {% for project in projects %}
+      <div class="project">
+        <h2>{{ project.title }}</h2>
+        <p>{{ project.description }}</p>
+        {% if project.link %}
+        <p>
+          <a href="{{ project.link }}" style="color: #00aaff">View Project →</a>
+        </p>
+        {% endif %}
+      </div>
+      {% empty %}
+      <p>No projects added yet. Check back soon!</p>
+      {% endfor %}
+    </div>
+
+    <footer>© {{ now|date:"Y" }} | Designed by Me | Built with Django</footer>
+  </body>
+</html>

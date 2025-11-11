@@ -1,0 +1,13 @@
+<section class="project-detail">
+  <h2>{{ project.title }}</h2>
+  {% if project.image %}
+  <img src="{{ project.image.url }}" alt="{{ project.title }}" />
+  {% endif %}
+  <p>{{ project.description }}</p>
+  <p><strong>Technologies:</strong> {{ project.technologies }}</p>
+  {% if project.github_url %}
+  <a href="{{ project.github_url }}" target="_blank" class="button">GitHub</a>
+  {% endif %} {% if project.live_url %}
+  <a href="{{ project.live_url }}" target="_blank" class="button">Live Demo</a>
+  {% endif %}
+</section>
