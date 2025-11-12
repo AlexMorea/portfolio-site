@@ -130,9 +130,6 @@ if os.getenv("RENDER", False):
     except Exception as e:
         print("Error loading data:", e)
 
-import os
-from pathlib import Path
-
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 STATIC_URL = "/static/"
