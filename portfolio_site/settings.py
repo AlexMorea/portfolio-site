@@ -1,23 +1,32 @@
+"""
+Django settings for portfolio_site project.
+Production-ready for Render deployment.
+"""
+
 import os
 from pathlib import Path
 from dotenv import load_dotenv
 import dj_database_url
 
-load_dotenv()
-
+# ------------------------------------------------------------
+# BASE CONFIG
+# ------------------------------------------------------------
 BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv(BASE_DIR / ".env")
 
-# ---------------------------
-# SECURITY SETTINGS
-# ---------------------------
-SECRET_KEY = os.getenv("SECRET_KEY", "django-insecure-default-secret")
-DEBUG = os.getenv("DEBUG", "False") == "True"
+SECRET_KEY = os.getenv("SECRET_KEY", "django-insecure-5k#4y$z@x_92k&")
+DEBUG = os.getenv("DEBUG", "False").lower() == "true"
 
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "localhost 127.0.0.1 [::1]").split(" ")
+ALLOWED_HOSTS = [
+    os.getenv("RENDER_EXTERNAL_HOSTNAME", "localhost"),
+    "localhost",
+    "127.0.0.1",
+    "alexmorea-portfolio.onrender.com",
+]
 
-# ---------------------------
-# APPLICATION DEFINITION
-# ---------------------------
+# ------------------------------------------------------------
+# APPLICATIONS
+# ------------------------------------------------------------
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -30,9 +39,9 @@ INSTALLED_APPS = [
     "blog.apps.BlogConfig",
 ]
 
-
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",  # static files on Render
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -46,7 +55,7 @@ ROOT_URLCONF = "portfolio_site.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / "templates"],
+        "DIRS": [BASE_DIR / "templates"],  # if you have custom templates
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -61,24 +70,19 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "portfolio_site.wsgi.application"
 
-# ---------------------------
-# DATABASE
-# ---------------------------
-DATABASE_URL = os.getenv("DATABASE_URL")
+# ------------------------------------------------------------
+# DATABASE CONFIG
+# ------------------------------------------------------------
+DATABASES = {
+    "default": dj_database_url.config(
+        default=os.getenv("DATABASE_URL", f"sqlite:///{BASE_DIR / 'db.sqlite3'}"),
+        conn_max_age=600,
+    )
+}
 
-if DATABASE_URL:
-    DATABASES = {"default": dj_database_url.parse(DATABASE_URL, conn_max_age=600)}
-else:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": BASE_DIR / "db.sqlite3",
-        }
-    }
-
-# ---------------------------
+# ------------------------------------------------------------
 # PASSWORD VALIDATION
-# ---------------------------
+# ------------------------------------------------------------
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
@@ -88,51 +92,40 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
-# ---------------------------
+# ------------------------------------------------------------
 # INTERNATIONALIZATION
-# ---------------------------
+# ------------------------------------------------------------
 LANGUAGE_CODE = "en-us"
 TIME_ZONE = "Africa/Johannesburg"
 USE_I18N = True
 USE_TZ = True
 
-# ---------------------------
+# ------------------------------------------------------------
 # STATIC & MEDIA FILES
-# ---------------------------
+# ------------------------------------------------------------
 STATIC_URL = "/static/"
-STATICFILES_DIRS = [BASE_DIR / "static"]
-STATIC_ROOT = BASE_DIR / "staticfiles"
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),  # optional, for local dev
+]
 
 MEDIA_URL = "/media/"
-MEDIA_ROOT = BASE_DIR / "media"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
-# ---------------------------
-# DEFAULT PRIMARY KEY FIELD
-# ---------------------------
+# Render / WhiteNoise static compression
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+# ------------------------------------------------------------
+# DEFAULT PRIMARY KEY FIELD TYPE
+# ------------------------------------------------------------
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-# ---------------------------
-# DEPLOYMENT SETTINGS
-# ---------------------------
+# ------------------------------------------------------------
+# DEPLOYMENT TWEAKS
+# ------------------------------------------------------------
 CSRF_TRUSTED_ORIGINS = [
     "https://alexmorea-portfolio.onrender.com",
 ]
 
-# Optional: for local development convenience
-if DEBUG:
-    INTERNAL_IPS = ["127.0.0.1"]
-
-if os.getenv("RENDER", False):
-    try:
-        from django.core.management import call_command
-
-        call_command("loaddata", "data.json")
-    except Exception as e:
-        print("Error loading data:", e)
-
-BASE_DIR = Path(__file__).resolve().parent.parent
-
-STATIC_URL = "/static/"
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
