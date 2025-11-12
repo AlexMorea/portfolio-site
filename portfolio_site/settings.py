@@ -120,3 +120,11 @@ CSRF_TRUSTED_ORIGINS = [
 # Optional: for local development convenience
 if DEBUG:
     INTERNAL_IPS = ["127.0.0.1"]
+
+if os.getenv("RENDER", False):
+    try:
+        from django.core.management import call_command
+
+        call_command("loaddata", "data.json")
+    except Exception as e:
+        print("Error loading data:", e)
