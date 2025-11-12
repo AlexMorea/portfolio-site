@@ -25,10 +25,11 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "core",
-    "blog",
-    "projects",
+    "core.apps.CoreConfig",
+    "projects.apps.ProjectsConfig",
+    "blog.apps.BlogConfig",
 ]
+
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -128,3 +129,13 @@ if os.getenv("RENDER", False):
         call_command("loaddata", "data.json")
     except Exception as e:
         print("Error loading data:", e)
+
+import os
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+STATIC_URL = "/static/"
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
