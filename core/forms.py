@@ -1,4 +1,3 @@
-# core/forms.py
 from django import forms
 from .models import ContactMessage
 
@@ -6,22 +5,15 @@ from .models import ContactMessage
 class ContactForm(forms.ModelForm):
     class Meta:
         model = ContactMessage
-        fields = ["name", "email", "subject", "message"]
+        fields = ["name", "email", "message"]
         widgets = {
             "name": forms.TextInput(
-                attrs={"placeholder": "Your name", "class": "form-control"}
+                attrs={"class": "form-input", "placeholder": "Your Name"}
             ),
             "email": forms.EmailInput(
-                attrs={"placeholder": "you@example.com", "class": "form-control"}
-            ),
-            "subject": forms.TextInput(
-                attrs={"placeholder": "Subject (optional)", "class": "form-control"}
+                attrs={"class": "form-input", "placeholder": "Your Email"}
             ),
             "message": forms.Textarea(
-                attrs={
-                    "placeholder": "Write your message...",
-                    "class": "form-control",
-                    "rows": 6,
-                }
+                attrs={"class": "form-textarea", "placeholder": "Your Message"}
             ),
         }
