@@ -1,5 +1,5 @@
-{% extends "base.html" %} {% block title %}{{ project.title }} — Alex{% endblock
-%} {% block content %}
+{% extends "base.html" %} {% load static %} {% block title %}{{ project.title }}
+— Alex{% endblock %} {% block content %}
 <section class="panel">
   <h2>{{ project.title }}</h2>
   <p class="muted">{{ project.short_description }}</p>
