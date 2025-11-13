@@ -99,3 +99,25 @@ a:focus{outline:2px dashed var(--accent-strong);outline-offset:6px}
     align-items:center;
   }
 }
+
+/* Make sure images and sections are fluid */
+img, video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Responsive layout padding */
+section, div {
+  box-sizing: border-box;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+  footer {
+    font-size: 12px;
+    padding: 15px;
+  }
+}

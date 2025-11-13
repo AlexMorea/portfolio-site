@@ -4,7 +4,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <title>{% block title %}Alex — Portfolio{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
     <script defer src="{% static 'js/bg.js' %}"></script>
@@ -35,15 +35,27 @@
       {% endif %} {% block content %}{% endblock %}
     </main>
 
-    <footer class="site-footer">
-      <div class="container">
-        <p>
-          Built with Django •
-          <a href="https://github.com/username" target="_blank" rel="noopener"
-            >github.com/username</a
-          >
-        </p>
-      </div>
+    <footer
+      style="text-align: center; padding: 20px; font-size: 14px; color: #888"
+    >
+      <p>
+        Built with ❤️ using
+        <a
+          href="https://alexmorea-portfolio.onrender.com"
+          target="_blank"
+          style="color: #4a90e2; text-decoration: none"
+        >
+          Django
+        </a>
+        •
+        <a
+          href="https://github.com/AlexMorea"
+          target="_blank"
+          style="color: #4a90e2; text-decoration: none"
+        >
+          github.com/AlexMorea
+        </a>
+      </p>
     </footer>
   </body>
 </html>
