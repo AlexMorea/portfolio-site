@@ -1,0 +1,145 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Me</title>
+
+    <style>
+      body {
+        background-color: #0a0a0f;
+        color: #e0e0e0;
+        font-family: "Poppins", sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      /* ---------- HEADER ---------- */
+      header {
+        background: linear-gradient(90deg, #000000, #0a1a3a);
+        color: white;
+        padding: 20px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      header h1 {
+        font-size: 1.6em;
+        margin: 0;
+        font-weight: 600;
+        letter-spacing: 1px;
+      }
+
+      /* ---------- NAV ---------- */
+      nav a {
+        margin-left: 20px;
+        color: #00aaff;
+        text-decoration: none;
+        font-weight: 500;
+        transition: 0.3s ease;
+      }
+
+      nav a:hover {
+        color: #33cfff;
+      }
+
+      /* ---------- CONTENT ---------- */
+      .container {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 20px;
+      }
+
+      .section {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 25px;
+        border-radius: 12px;
+        line-height: 1.8;
+        box-shadow: 0 6px 20px rgba(0, 0, 255, 0.1);
+      }
+
+      h2 {
+        color: #00aaff;
+        margin-top: 0;
+      }
+
+      /* ---------- FOOTER ---------- */
+      footer {
+        text-align: center;
+        padding: 20px;
+        color: #666;
+        font-size: 0.9em;
+        margin-top: 40px;
+      }
+
+      /* ---------- RESPONSIVE ---------- */
+      @media (max-width: 600px) {
+        header {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        nav a {
+          margin-left: 12px;
+          font-size: 0.9em;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <h1>👨🏽‍💻 About Me</h1>
+
+      <nav>
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'projects' %}">Projects</a>
+        <a href="{% url 'about' %}">About</a>
+        <a href="{% url 'contact' %}">Contact</a>
+      </nav>
+    </header>
+
+    <div class="container">
+      <div class="section">
+        <h2>Who I Am</h2>
+
+        <p>
+          I’m a passionate web developer with a focus on backend development
+          using
+          <strong>Python</strong> and <strong>Django</strong>. Over the past
+          year, I’ve completed intensive bootcamps and real-world projects that
+          helped me master everything from building APIs to full-stack web
+          applications. I enjoy crafting software that feels human, performs
+          efficiently, and solves real problems.
+        </p>
+
+        <p>
+          My journey into tech began with a curiosity for how things work behind
+          the scenes. That curiosity quickly evolved into a commitment to
+          building reliable, scalable systems that people can depend on. Whether
+          it’s architecting a clean backend, integrating third-party services,
+          or improving performance, I’m driven by the process of turning ideas
+          into working software.
+        </p>
+
+        <p>
+          I take pride in writing maintainable, well-structured code and
+          continuously improving my skills through projects, documentation, and
+          collaborative learning. Every application I build is an opportunity to
+          sharpen my craft and bring value to both users and teams.
+        </p>
+
+        <p>
+          Outside of coding, I enjoy exploring new technologies, working on
+          personal projects, and studying modern web development patterns to
+          stay ahead in a fast-evolving industry.
+        </p>
+      </div>
+    </div>
+
+    <footer>© {{ now|date:"Y" }} | Designed by Me | Built with Django</footer>
+  </body>
+</html>

@@ -15,7 +15,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(BASE_DIR / ".env")
 
 SECRET_KEY = os.getenv("SECRET_KEY", "django-insecure-5k#4y$z@x_92k&")
-DEBUG = os.getenv("DEBUG", "False").lower() == "true"
+DEBUG = True
+# DEBUG = os.getenv("DEBUG", "False").lower() == "true"
 
 ALLOWED_HOSTS = [
     os.getenv("RENDER_EXTERNAL_HOSTNAME", "localhost"),

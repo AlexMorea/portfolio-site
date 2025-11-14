@@ -1,0 +1,183 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ project.title }} — Portfolio</title>
+
+    <style>
+      body {
+        background-color: #0a0a0f;
+        color: #e0e0e0;
+        font-family: "Poppins", sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      /* ---------- HEADER ---------- */
+      header {
+        background: linear-gradient(90deg, #000000, #0a1a3a);
+        color: white;
+        padding: 20px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      header h1 {
+        font-size: 1.6em;
+        margin: 0;
+        font-weight: 600;
+        letter-spacing: 1px;
+      }
+
+      /* ---------- NAV ---------- */
+      nav a {
+        margin-left: 20px;
+        color: #00aaff;
+        text-decoration: none;
+        font-weight: 500;
+        transition: 0.3s;
+      }
+
+      nav a:hover {
+        color: #33cfff;
+      }
+
+      /* ---------- CONTAINER ---------- */
+      .container {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 20px;
+      }
+
+      /* ---------- PROJECT DETAIL BOX ---------- */
+      .project-box {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 25px;
+        border-radius: 12px;
+      }
+
+      .project-box h2 {
+        color: #00aaff;
+        margin-top: 0;
+      }
+
+      .project-image {
+        width: 100%;
+        border-radius: 12px;
+        margin: 20px 0;
+        box-shadow: 0 6px 20px rgba(0, 0, 255, 0.15);
+      }
+
+      .description {
+        line-height: 1.6;
+        color: #b0b0b0;
+        margin-bottom: 20px;
+      }
+
+      /* ---------- BUTTON LINKS ---------- */
+      .links {
+        margin-top: 25px;
+      }
+
+      .link-btn {
+        display: inline-block;
+        padding: 12px 22px;
+        border-radius: 8px;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: 0.3s ease;
+        background: linear-gradient(90deg, #003d66, #005c99);
+        color: white;
+        box-shadow: 0 4px 12px rgba(0, 150, 255, 0.3);
+      }
+
+      .link-btn.github {
+        background: linear-gradient(90deg, #2b2b2b, #444444);
+      }
+
+      .link-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 18px rgba(0, 150, 255, 0.45);
+      }
+
+      /* ---------- FOOTER ---------- */
+      footer {
+        text-align: center;
+        padding: 20px;
+        color: #666;
+        font-size: 0.9em;
+        margin-top: 40px;
+      }
+
+      /* ---------- RESPONSIVE ---------- */
+      @media (max-width: 600px) {
+        header {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        nav a {
+          margin-left: 12px;
+          font-size: 0.9em;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- HEADER -->
+    <header>
+      <h1>{{ project.title }}</h1>
+
+      <nav>
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'projects' %}">Projects</a>
+        <a href="{% url 'about' %}">About</a>
+        <a href="{% url 'contact' %}">Contact</a>
+      </nav>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+      <div class="project-box">
+        {% if project.image %}
+        <img
+          src="{{ project.image.url }}"
+          alt="{{ project.title }}"
+          class="project-image"
+        />
+        {% endif %}
+
+        <h2>{{ project.title }}</h2>
+
+        <p class="description">{{ project.description }}</p>
+
+        <!-- BUTTON LINKS -->
+        <div class="links">
+          {% if project.live_link %}
+          <a class="link-btn" href="{{ project.live_link }}" target="_blank">
+            🚀 Live Demo
+          </a>
+          {% endif %} {% if project.github_link %}
+          <a
+            class="link-btn github"
+            href="{{ project.github_link }}"
+            target="_blank"
+          >
+            💻 GitHub Repo
+          </a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>© {{ now|date:"Y" }} | Designed by Me | Built with Django</footer>
+  </body>
+</html>
