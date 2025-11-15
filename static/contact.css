@@ -81,6 +81,7 @@ nav a:hover {
   font-size: 1em;
   margin-bottom: 18px;
   transition: 0.3s;
+  box-sizing: border-box;
 }
 
 .form-input:focus,
@@ -94,6 +95,11 @@ nav a:hover {
   resize: vertical;
 }
 
+.form-input,
+.form-textarea,
+.submit-btn {
+  box-sizing: border-box;
+}
 
 .submit-btn {
   width: 100%;
@@ -108,6 +114,7 @@ nav a:hover {
   transition: 0.3s;
   margin-top: 10px;
   box-shadow: 0 4px 12px rgba(0, 150, 255, 0.3);
+  box-sizing: border-box;
 }
 
 .submit-btn:hover {
