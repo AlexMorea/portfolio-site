@@ -1,6 +1,18 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Project
 from .forms import ContactForm
+from django.contrib.auth.models import User
+from django.http import HttpResponse
+
+
+def create_temp_admin(request):
+    if User.objects.filter(username="admin").exists():
+        return HttpResponse("Admin already exists")
+
+    User.objects.create_superuser(
+        username="admin", email="admin@example.com", password="ChangeMe123!"
+    )
+    return HttpResponse("Superuser created. Please delete this endpoint now.")
 
 
 def home(request):
