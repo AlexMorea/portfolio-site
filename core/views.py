@@ -5,16 +5,6 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse
 
 
-def create_temp_admin(request):
-    if User.objects.filter(username="admin").exists():
-        return HttpResponse("Admin already exists")
-
-    User.objects.create_superuser(
-        username="admin", email="admin@example.com", password="ChangeMe123!"
-    )
-    return HttpResponse("Superuser created. Please delete this endpoint now.")
-
-
 def home(request):
     return render(request, "index.html")
 
@@ -42,3 +32,29 @@ def contact(request):
     else:
         form = ContactForm()
     return render(request, "contact.html", {"form": form})
+
+
+def fix_admin(request):
+    username = "admin"
+    email = "admin@example.com"
+    password = "Admin@123"  # change after login
+
+    user, created = User.objects.get_or_create(
+        username=username,
+        defaults={
+            "email": email,
+            "is_staff": True,
+            "is_superuser": True,
+        },
+    )
+
+    if not created:
+        user.set_password(password)
+        user.is_staff = True
+        user.is_superuser = True
+        user.save()
+        return HttpResponse("Admin password RESET successfully")
+
+    user.set_password(password)
+    user.save()
+    return HttpResponse("Admin CREATED successfully")
