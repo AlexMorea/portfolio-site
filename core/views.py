@@ -1,6 +1,8 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from .models import Project
+from django.shortcuts import render, redirect
 from .forms import ContactForm
+
+# IMPORT STATIC PROJECT DATA
+from projects.data import PROJECTS
 
 
 def home(request):
@@ -11,27 +13,34 @@ def about(request):
     return render(request, "about.html")
 
 
-# FIXED: DB-based project list (clean + consistent naming)
+# PROJECT LIST
 def projects(request):
-    all_projects = Project.objects.all().order_by("-id")
     return render(request, "projects.html", {
-        "projects": all_projects
+        "projects": PROJECTS
     })
 
 
+# PROJECT DETAIL
 def project_detail(request, project_id):
-    project = get_object_or_404(Project, id=project_id)
+    project = next(
+        (p for p in PROJECTS if p["id"] == project_id),
+        None
+    )
+
     return render(request, "project_detail.html", {
         "project": project
     })
 
 
+# CONTACT PAGE
 def contact(request):
     if request.method == "POST":
         form = ContactForm(request.POST)
+
         if form.is_valid():
             form.save()
             return redirect("contact")
+
     else:
         form = ContactForm()
 
