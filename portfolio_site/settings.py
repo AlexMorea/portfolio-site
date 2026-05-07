@@ -125,3 +125,10 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
+
+if os.environ.get("RENDER"):
+    try:
+        import create_superuser
+    except Exception as e:
+        print(f"Superuser creation failed: {e}")
