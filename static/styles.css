@@ -122,5 +122,28 @@ section, div {
   }
 }
 
+/* =========================
+   Download Resume Button
+   ========================= */
+.btn-resume{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 12px;
+  border-radius:10px;
+  text-decoration:none;
+  font-weight:700;
+  font-size:0.95rem;
+  color: var(--text);
+  border:1px solid rgba(255,255,255,0.10);
+  background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+  transition: transform .15s ease, background .15s ease, border-color .15s ease;
+}
+
+.btn-resume:hover{
+  transform: translateY(-1px);
+  border-color: rgba(30,144,255,0.35);
+  background: linear-gradient(180deg, rgba(30,144,255,0.12), rgba(255,255,255,0.03));
+}
 
 
